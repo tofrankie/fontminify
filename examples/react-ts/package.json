@@ -1,0 +1,31 @@
+{
+  "name": "react-ts",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:with-fonts": "pnpm font:minify && pnpm build",
+    "font:minify": "fontminify build",
+    "font:preset": "fontminify presets generate --out public/fonts-original/preset-chars.txt --force",
+    "font:presets": "fontminify presets list",
+    "lint": "eslint . --fix",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@tofrankie/eslint": "^0.0.11",
+    "@tofrankie/fontminify": "workspace:*",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "eslint": "^9.39.4",
+    "typescript": "~5.9.3",
+    "vite": "^8.0.0"
+  }
+}

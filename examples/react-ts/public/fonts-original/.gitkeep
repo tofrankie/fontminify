@@ -1,0 +1,3 @@
+# Place your .ttf font files here, then run:
+#   pnpm font:minify
+# Subset fonts will be written to public/fonts/ and used by the app.
