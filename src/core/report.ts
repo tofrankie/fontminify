@@ -94,7 +94,7 @@ export function printReport(report: BuildReport): void {
     `${b('Chars')}  ` +
       `preset: ${report.presetCharCount.toLocaleString()}  ` +
       `scanned: ${report.scannedCharCount.toLocaleString()}  ` +
-      `total: ${b(report.totalCharCount.toLocaleString())}\n\n`
+      `total (unique): ${b(report.totalCharCount.toLocaleString())}\n\n`
   )
 
   // Group results by font name, preserving the descending-savings order within each font.
