@@ -1,7 +1,7 @@
-import type { FontFormat, FontminifyConfig, ResolvedFontminifyConfig } from '../types.js'
+import type { FontFormat, FontminifyConfig, ResolvedFontminifyConfig } from '../types'
 import { existsSync } from 'node:fs'
 import { normalize, resolve } from 'node:path'
-import { createRuntimeError, createUserError } from '../errors.js'
+import { createRuntimeError, createUserError } from '../errors'
 
 const VALID_FORMATS = new Set<FontFormat>(['ttf', 'woff', 'woff2'])
 

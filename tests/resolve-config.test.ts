@@ -6,8 +6,8 @@ import {
   loadConfigFile,
   resolveConfig,
   validateResolvedConfig,
-} from '../src/config/resolve-config.js'
-import { FontminifyError } from '../src/errors.js'
+} from '../src/config/resolve-config'
+import { FontminifyError } from '../src/errors'
 
 // ─── resolveConfig ────────────────────────────────────────────────────────────
 

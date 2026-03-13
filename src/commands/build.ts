@@ -1,15 +1,15 @@
 import type { Command } from 'commander'
-import type { FontFormat, FontminifyConfig } from '../types.js'
+import type { FontFormat, FontminifyConfig } from '../types'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { performance } from 'node:perf_hooks'
-import { loadConfigFile, resolveConfig, validateResolvedConfig } from '../config/resolve-config.js'
-import { mergeAndSort, readPresetFiles, resolvePresetPaths } from '../core/character-list.js'
-import { collectChars } from '../core/extract.js'
-import { minifyAllFonts } from '../core/minify.js'
-import { buildReport, printReport, printReportJson } from '../core/report.js'
-import { ERROR_CODES, FontminifyError } from '../errors.js'
-import { handleCliError } from '../utils/handle-error.js'
+import { loadConfigFile, resolveConfig, validateResolvedConfig } from '../config/resolve-config'
+import { mergeAndSort, readPresetFiles, resolvePresetPaths } from '../core/character-list'
+import { collectChars } from '../core/extract'
+import { minifyAllFonts } from '../core/minify'
+import { buildReport, printReport, printReportJson } from '../core/report'
+import { ERROR_CODES, FontminifyError } from '../errors'
+import { handleCliError } from '../utils/handle-error'
 
 interface BuildOptions {
   config?: string

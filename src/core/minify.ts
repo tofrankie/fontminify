@@ -1,8 +1,8 @@
-import type { FontFormat, FontSubsetResult, ResolvedFontminifyConfig } from '../types.js'
+import type { FontFormat, FontSubsetResult, ResolvedFontminifyConfig } from '../types'
 import { mkdir, readdir, rm, stat } from 'node:fs/promises'
 import { basename, extname, join, normalize, resolve } from 'node:path'
 import Fontmin from 'fontmin'
-import { createRuntimeError, createUserError } from '../errors.js'
+import { createRuntimeError, createUserError } from '../errors'
 
 /**
  * Discover all .ttf files in a directory (non-recursive).

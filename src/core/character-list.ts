@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { glob } from 'tinyglobby'
-import { createUserError } from '../errors.js'
+import { createUserError } from '../errors'
 
 const GLOB_META_RE = /[*?{}[\]!]/
 const LINE_BREAK_RE = /\r?\n/u

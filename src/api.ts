@@ -1,15 +1,15 @@
-import type { BuildReport, FontminifyConfig, ResolvedFontminifyConfig } from './types.js'
+import type { BuildReport, FontminifyConfig, ResolvedFontminifyConfig } from './types'
 import { performance } from 'node:perf_hooks'
-import { loadConfigFile, resolveConfig, validateResolvedConfig } from './config/resolve-config.js'
-import { mergeAndSort, readPresetFiles, resolvePresetPaths } from './core/character-list.js'
-import { collectChars } from './core/extract.js'
-import { minifyAllFonts } from './core/minify.js'
-import { buildReport } from './core/report.js'
-import { ERROR_CODES, FontminifyError } from './errors.js'
+import { loadConfigFile, resolveConfig, validateResolvedConfig } from './config/resolve-config'
+import { mergeAndSort, readPresetFiles, resolvePresetPaths } from './core/character-list'
+import { collectChars } from './core/extract'
+import { minifyAllFonts } from './core/minify'
+import { buildReport } from './core/report'
+import { ERROR_CODES, FontminifyError } from './errors'
 
 export type { BuildReport, FontminifyConfig, ResolvedFontminifyConfig }
-export { defineConfig, validateResolvedConfig } from './config/resolve-config.js'
-export { ERROR_CODES, FontminifyError } from './errors.js'
+export { defineConfig, validateResolvedConfig } from './config/resolve-config'
+export { ERROR_CODES, FontminifyError } from './errors'
 export type {
   CollectConfig,
   FontFormat,
@@ -17,7 +17,7 @@ export type {
   FontSubsetResult,
   GlyphConfig,
   ReportConfig,
-} from './types.js'
+} from './types'
 
 /**
  * Resolve config from file + optional overrides.

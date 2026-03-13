@@ -7,8 +7,8 @@ import {
   discoverFonts,
   minifyAllFonts,
   minifyOneFont,
-} from '../src/core/minify.js'
-import { FontminifyError } from '../src/errors.js'
+} from '../src/core/minify'
+import { FontminifyError } from '../src/errors'
 
 const TMP = tmpdir()
 

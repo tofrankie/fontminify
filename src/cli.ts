@@ -2,10 +2,10 @@ import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Command } from 'commander'
-import { registerBuildCommand } from './commands/build.js'
-import { registerCollectCommand } from './commands/collect.js'
-import { registerInitCommand } from './commands/init.js'
-import { registerPresetsCommand } from './commands/presets.js'
+import { registerBuildCommand } from './commands/build'
+import { registerCollectCommand } from './commands/collect'
+import { registerInitCommand } from './commands/init'
+import { registerPresetsCommand } from './commands/presets'
 
 // Suppress DEP0180 emitted by fontmin's dependency chain on Node 22+.
 //

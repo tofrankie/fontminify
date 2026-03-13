@@ -1,6 +1,6 @@
-import type { FontSubsetResult } from '../src/types.js'
+import type { FontSubsetResult } from '../src/types'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { buildReport, formatSize, printReport, printReportJson } from '../src/core/report.js'
+import { buildReport, formatSize, printReport, printReportJson } from '../src/core/report'
 
 // ─── formatSize ───────────────────────────────────────────────────────────────
 

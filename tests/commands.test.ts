@@ -11,10 +11,10 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { Command } from 'commander'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { registerBuildCommand } from '../src/commands/build.js'
-import { registerCollectCommand } from '../src/commands/collect.js'
-import { registerInitCommand } from '../src/commands/init.js'
-import { registerPresetsCommand } from '../src/commands/presets.js'
+import { registerBuildCommand } from '../src/commands/build'
+import { registerCollectCommand } from '../src/commands/collect'
+import { registerInitCommand } from '../src/commands/init'
+import { registerPresetsCommand } from '../src/commands/presets'
 
 const TMP = tmpdir()
 const PKG = JSON.parse(readFileSync('package.json', 'utf8')) as { version: string }

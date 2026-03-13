@@ -6,7 +6,7 @@ export {
   FontminifyError,
   getResolvedConfig,
   validateResolvedConfig,
-} from './api.js'
+} from './api'
 
 export type {
   BuildReport,
@@ -18,4 +18,4 @@ export type {
   GlyphConfig,
   ReportConfig,
   ResolvedFontminifyConfig,
-} from './api.js'
+} from './api'

@@ -1,4 +1,4 @@
-import type { BuildReport, FontSubsetResult } from '../types.js'
+import type { BuildReport, FontSubsetResult } from '../types'
 import { relative } from 'node:path'
 
 // ─── Size formatting ──────────────────────────────────────────────────────────

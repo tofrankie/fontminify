@@ -1,10 +1,10 @@
 import type { Command } from 'commander'
-import type { FontminifyConfig } from '../types.js'
+import type { FontminifyConfig } from '../types'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
-import { loadConfigFile, resolveConfig } from '../config/resolve-config.js'
-import { collectChars } from '../core/extract.js'
-import { handleCliError } from '../utils/handle-error.js'
+import { loadConfigFile, resolveConfig } from '../config/resolve-config'
+import { collectChars } from '../core/extract'
+import { handleCliError } from '../utils/handle-error'
 
 interface CollectOptions {
   config?: string

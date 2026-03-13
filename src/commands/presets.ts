@@ -4,8 +4,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { input, select } from '@inquirer/prompts'
-import { createRuntimeError, createUserError } from '../errors.js'
-import { handleCliError } from '../utils/handle-error.js'
+import { createRuntimeError, createUserError } from '../errors'
+import { handleCliError } from '../utils/handle-error'
 
 /** Preset files (from src/templates/presets) are copied to dist/presets at build time. */
 const __dirname = dirname(fileURLToPath(import.meta.url))

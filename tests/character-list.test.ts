@@ -8,7 +8,7 @@ import {
   readPresetFiles,
   resolvePresetPaths,
   textToCharacterList,
-} from '../src/core/character-list.js'
+} from '../src/core/character-list'
 
 describe('textToCharacterList', () => {
   it('extracts unique chars', () => {

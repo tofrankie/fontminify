@@ -1,4 +1,4 @@
-import { ERROR_CODES, FontminifyError } from '../errors.js'
+import { ERROR_CODES, FontminifyError } from '../errors'
 
 interface HandleErrorOptions {
   /** When true, output the error as a JSON object to stderr instead of plain text. */

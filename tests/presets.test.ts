@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { Command } from 'commander'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { registerPresetsCommand, resolveOutputPath } from '../src/commands/presets.js'
+import { registerPresetsCommand, resolveOutputPath } from '../src/commands/presets'
 
 // Mock path.join so PRESETS_DIR in presets.ts points to a fixture (for generate tests).
 // Must run before presets module uses join(__dirname, 'presets').

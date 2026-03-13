@@ -2,8 +2,8 @@ import type { Command } from 'commander'
 import { existsSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import { createUserError } from '../errors.js'
-import { handleCliError } from '../utils/handle-error.js'
+import { createUserError } from '../errors'
+import { handleCliError } from '../utils/handle-error'
 
 const TEMPLATE = `import { defineConfig } from '@tofrankie/fontminify'
 

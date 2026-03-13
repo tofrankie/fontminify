@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { collectChars, globFiles } from '../src/core/extract.js'
+import { collectChars, globFiles } from '../src/core/extract'
 
 const TMP = tmpdir()
 

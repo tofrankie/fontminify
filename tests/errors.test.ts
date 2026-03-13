@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createRuntimeError, createUserError, FontminifyError, isNodeError } from '../src/errors.js'
+import { createRuntimeError, createUserError, FontminifyError, isNodeError } from '../src/errors'
 
 describe('FontminifyError', () => {
   it('is an instance of Error', () => {

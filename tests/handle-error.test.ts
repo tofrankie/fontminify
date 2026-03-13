@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { createRuntimeError, createUserError, FontminifyError } from '../src/errors.js'
-import { handleCliError } from '../src/utils/handle-error.js'
+import { createRuntimeError, createUserError, FontminifyError } from '../src/errors'
+import { handleCliError } from '../src/utils/handle-error'
 
 describe('handleCliError', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>

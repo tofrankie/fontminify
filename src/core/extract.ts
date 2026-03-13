@@ -1,8 +1,8 @@
-import type { CollectConfig } from '../types.js'
+import type { CollectConfig } from '../types'
 import { createReadStream } from 'node:fs'
 import * as readline from 'node:readline'
 import { glob } from 'tinyglobby'
-import { createUserError } from '../errors.js'
+import { createUserError } from '../errors'
 
 const DEFAULT_CHARACTER_PATTERN = '\\p{Script=Han}'
 

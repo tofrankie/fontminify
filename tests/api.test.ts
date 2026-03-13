@@ -2,8 +2,8 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { buildSubset, collectProjectChars, getResolvedConfig } from '../src/api.js'
-import { FontminifyError } from '../src/errors.js'
+import { buildSubset, collectProjectChars, getResolvedConfig } from '../src/api'
+import { FontminifyError } from '../src/errors'
 
 const TMP = tmpdir()
 
