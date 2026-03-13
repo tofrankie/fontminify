@@ -4,13 +4,13 @@
 
 English | [中文](./README.zh-CN.md)
 
-fontminify is a **font subsetting** tool: it generates subset fonts from TTF based on a given character set. Subsetting keeps only the characters you need, which can significantly reduce file size.
+**fontminify** is a font subsetting tool: it builds subset fonts from TTF using the characters you provide, keeping only those glyphs to reduce file size.
 
 ## Features
 
 - **Which characters are kept?**
   - Automatically extracts characters used in your project (default: Chinese characters).
-  - Built-in preset character sets (common characters, punctuation, ASCII, etc.) for quick export; you can edit exported files or build your own from scratch.
+  - Built-in preset character lists (common characters, punctuation, ASCII, etc.) for quick export; you can edit exported files or build your own from scratch.
 
 - **Subsetting and output**
   - Batch subsetting; multiple output formats (WOFF, WOFF2, etc.).
@@ -21,7 +21,7 @@ fontminify is a **font subsetting** tool: it generates subset fonts from TTF bas
 ## Important
 
 > [!IMPORTANT]
-> Subsetting keeps only the requested characters and can greatly reduce font size. Characters not in the set will fall back to the default font — **you are responsible for the result**. Use `--chars-out` to export the character set for review.
+> Subsetting keeps only the requested characters and can greatly reduce font size. Characters not in the list will fall back to the default font — **you are responsible for the result**. Use `--chars-out` to export the list of characters (used for subsetting) for review.
 >
 > - The amount of savings depends on how many characters you keep
 > - Missing characters may appear as missing glyphs depending on your environment
@@ -123,7 +123,7 @@ Comparison:
 
 ## Config file
 
-Config file name: `fontminify.config.js` (`.mjs` / `.cjs` / `.ts` also supported). Place it in the project root or pass path via `--config`.
+Config file name: `fontminify.config.js` (`.mjs.cjs.ts` also supported). Place it in the project root or pass path via `--config`.
 
 > Priority: **CLI args > config file > defaults.**
 
@@ -161,12 +161,12 @@ export default defineConfig({
 ## Commands and options
 
 - `fontminify build` — Full pipeline: read presets → scan project → merge/dedupe → batch subset → report
-- `fontminify collect` — Collect and print the character set only
+- `fontminify collect` — Collect and print the characters to include (no font output)
 - `fontminify init` — Generate `fontminify.config.js` in the current directory
 - `fontminify presets list` — List all built-in presets
 - `fontminify presets generate` — Export a built-in preset to a file for editing
 
-#### `fontminify build`
+### `fontminify build`
 
 Full pipeline: read presets → scan project → merge/dedupe → batch subset → report.
 
@@ -181,17 +181,17 @@ Full pipeline: read presets → scan project → merge/dedupe → batch subset �
 | `--font-dest <dir>`           | Output font directory                                                | `fonts.dest`               |
 | `--formats <list>`            | Output formats, comma-separated, e.g. `ttf`, `woff`, `woff2`         | `fonts.formats`            |
 | `--dry-run`                   | Scan and estimate only, do not write font files                      | —                          |
-| `--chars-out <path>`          | Write final character set to a file                                  | —                          |
+| `--chars-out <path>`          | Write the final characters (used for subsetting) to a file           | —                          |
 | `--silent`                    | Suppress progress (JSON report still printed if `--json` is set)     | —                          |
 | `--json`                      | Output report as JSON to stdout                                      | `report.json`              |
 
-#### `fontminify init`
+### `fontminify init`
 
 Generates `fontminify.config.js` in the current directory. Fails if the file already exists unless `--force` is used.
 
-#### `fontminify collect`
+### `fontminify collect`
 
-Collect and print the character set only. Useful for debugging.
+Collect and print the characters to include only; no subsetting. Useful for debugging.
 
 ```bash
 # Default: print to stdout
@@ -204,25 +204,25 @@ $ fontminify collect --out chars.txt
 $ fontminify collect --json | jq .count
 ```
 
-#### `fontminify presets list`
+### `fontminify presets list`
 
 List all built-in presets.
 
-Current presets: Simplified Chinese, Traditional Chinese, Hong Kong common characters, Taiwan common characters, ASCII. PRs welcome for more preset character sets. 👋
+Current presets: Simplified Chinese, Traditional Chinese, Hong Kong common characters, Taiwan common characters, ASCII. PRs welcome for more preset character lists. 👋
 
-| Preset name                             | Description                                                                                                 |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `zh-CN-common-characters`               | [Modern Chinese common characters](./src/templates/presets/zh-CN-common-characters.txt) (2,500 chars)       |
-| `zh-CN-secondary-characters`            | [Modern Chinese secondary characters](./src/templates/presets/zh-CN-secondary-characters.txt) (1,000 chars) |
-| `zh-CN-common-and-secondary-characters` | [Common + secondary](./src/templates/presets/zh-CN-common-and-secondary-characters.txt) (3,500 chars)       |
-| `zh-CN-punctuation-characters`          | [Chinese punctuation](./src/templates/presets/zh-CN-punctuation-characters.txt)                             |
-| `zh-HK-common-characters`               | [Hong Kong common characters](./src/templates/presets/zh-HK-common-characters.txt) (4,762 chars)            |
-| `zh-TW-common-characters`               | [Taiwan common characters](./src/templates/presets/zh-TW-common-characters.txt) (4,808 chars)               |
-| `ascii-characters`                      | [ASCII character set](./src/templates/presets/ascii-characters.txt)                                         |
+| Preset name                             | Description                                                                                                                     |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `zh-CN-common-characters`               | [Modern Chinese common characters](./src/templates/presets/zh-CN-common-characters.txt) (2,500 chars)                           |
+| `zh-CN-secondary-characters`            | [Modern Chinese secondary characters](./src/templates/presets/zh-CN-secondary-characters.txt) (1,000 chars)                     |
+| `zh-CN-common-and-secondary-characters` | [Modern Chinese common + secondary characters](./src/templates/presets/zh-CN-common-and-secondary-characters.txt) (3,500 chars) |
+| `zh-CN-punctuation-characters`          | [Chinese punctuation](./src/templates/presets/zh-CN-punctuation-characters.txt)                                                 |
+| `zh-HK-common-characters`               | [Hong Kong common characters](./src/templates/presets/zh-HK-common-characters.txt) (4,762 chars)                                |
+| `zh-TW-common-characters`               | [Taiwan common characters](./src/templates/presets/zh-TW-common-characters.txt) (4,808 chars)                                   |
+| `ascii-characters`                      | [ASCII characters](./src/templates/presets/ascii-characters.txt)                                                                |
 
 You can combine presets, e.g. common + secondary + punctuation + ASCII (choose as needed).
 
-#### `fontminify presets generate`
+### `fontminify presets generate`
 
 Export a built-in preset to a file. Edit the file if the preset does not match your needs.
 
@@ -253,7 +253,7 @@ $ fontminify presets generate zh-CN-common-and-secondary-characters --out preset
 
 - **Config:** `FontminifyConfig`, `ResolvedFontminifyConfig`, `CollectConfig`, `FontsConfig`, `GlyphConfig`, `ReportConfig`
 - **Results:** `BuildReport`, `FontSubsetResult`, `FontFormat`
-- **Errors:** `FontminifyError` (with `code`: `USER_ERROR` / `RUNTIME_ERROR` / `EMPTY_CHARACTER_SET`). Use `ERROR_CODES` for comparison.
+- **Errors:** `FontminifyError` (with `code`: `USER_ERROR` / `RUNTIME_ERROR` / `EMPTY_CHARACTER_LIST`). Use `ERROR_CODES` for comparison.
 
 ### Example
 
@@ -273,11 +273,11 @@ console.log(`Saved ${report.totalSavedBytes} bytes`)
 $ fontminify build --json > font-report.json
 ```
 
-| Exit code | Meaning                                                         |
-| --------- | --------------------------------------------------------------- |
-| 0         | Success                                                         |
-| 1         | User error (bad args, missing paths, empty character set, etc.) |
-| 2         | Runtime error (subsetting or I/O failure)                       |
+| Exit code | Meaning                                                             |
+| --------- | ------------------------------------------------------------------- |
+| 0         | Success                                                             |
+| 1         | User error (bad args, missing paths, no characters collected, etc.) |
+| 2         | Runtime error (subsetting or I/O failure)                           |
 
 ## License
 

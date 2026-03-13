@@ -1,27 +1,25 @@
 # @tofrankie/fontminify
 
-[![npm version](https://img.shields.io/npm/v/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify) [![node version](https://img.shields.io/node/v/@tofrankie/fontminify)](https://nodejs.org) [![npm package license](https://img.shields.io/npm/l/@tofrankie/fontminify)](https://github.com/tofrankie/fontminify/blob/main/LICENSE)
+[npm version](https://www.npmjs.com/package/@tofrankie/fontminify) [node version](https://nodejs.org) [npm package license](https://github.com/tofrankie/fontminify/blob/main/LICENSE)
 
 [English](./README.md) | 中文
 
-fontminify 是一款**字体子集化**工具：从 TTF 按指定字符集生成子集字体。子集只保留所需字符，可显著减小文件体积。
+**fontminify** 是一个字体子集化工具：根据你提供的字符从 TTF 生成子集字体，仅保留这些字形，可显著减小文件体积。
 
 ## 特性概览
 
 - **子集保留哪些字符？**
   - 自动提取项目用字，默认提取汉字。
   - 内置预设字库（常用字、标点、ASCII 等），支持快速导出；不满足可自行增删，也可完全自建字库。
-
 - **子集化与输出**
   - 支持批量子集化；多格式输出（WOFF、WOFF2 等）
-
 - **使用方式**
   - CLI 与 Node API（脚本）两种使用方式，可配合配置文件；完整 TypeScript 类型
 
 ## 写在前面
 
 > [!IMPORTANT]
-> 子集化只保留所需字符，可大幅减小字体体积。未覆盖的字符会回退到默认字体显示，**后果需自行承担**；可用 `--chars-out` 导出字符集做审查。
+> 子集化只保留所需字符，可大幅减小字体体积。未覆盖的字符会回退到默认字体显示，**后果自行承担**；可用 `--chars-out` 导出最终要保留的字符列表做审查。
 >
 > - 优化幅度具体取决于保留的字符数量
 > - 未覆盖的字符不排除出现缺字情况，取决于你的应用环境
@@ -169,12 +167,12 @@ export default defineConfig({
 ## 命令与选项
 
 - `fontminify build` — 完整流程：读预置字 → 扫描项目字符 → 合并去重 → 批量子集化 → 输出统计
-- `fontminify collect` — 只收集并输出字符集
+- `fontminify collect` — 只收集并输出要保留的字符（不生成字体）
 - `fontminify init` — 在当前目录生成 `fontminify.config.js` 配置文件
 - `fontminify presets list` — 列出所有内置预设字库
 - `fontminify presets generate` — 把内置预设导出为文件以便修改
 
-#### `fontminify build`
+### `fontminify build`
 
 完整流程：读预置字 → 扫描项目字符 → 合并去重 → 批量子集化 → 输出统计。
 
@@ -189,17 +187,17 @@ export default defineConfig({
 | `--font-dest <dir>`           | 输出字体目录                                          | `fonts.dest`               |
 | `--formats <list>`            | 输出格式，逗号分隔，如：`ttf`, `woff`, `woff2`        | `fonts.formats`            |
 | `--dry-run`                   | 只扫描预估，不生成字体                                | —                          |
-| `--chars-out <path>`          | 将最终字符集写入文件                                  | —                          |
+| `--chars-out <path>`          | 将最终要保留的字符写入文件                            | —                          |
 | `--silent`                    | 不打印进度（若同时启用 `--json`，仍会输出 JSON 报告） | —                          |
 | `--json`                      | 报告以 JSON 输出到 stdout                             | `report.json`              |
 
-#### `fontminify init`
+### `fontminify init`
 
 在当前目录生成 `fontminify.config.js`。若配置文件已存在，默认情况下会报错，可加 `--force` 覆盖。
 
-#### `fontminify collect`
+### `fontminify collect`
 
-只收集并输出字符集。常用于调试。
+只收集并输出要保留的字符，不进行子集化。常用于调试。
 
 ```bash
 # 默认输出到 stdout
@@ -212,7 +210,7 @@ $ fontminify collect --out chars.txt
 $ fontminify collect --json | jq .count
 ```
 
-#### `fontminify presets list`
+### `fontminify presets list`
 
 列出所有内置预设字库。
 
@@ -230,7 +228,7 @@ $ fontminify collect --json | jq .count
 
 通常情况下，可能要多个预设进行组合，比如现代汉语常用字 + 次常用字 + 标点符号 + ASCII 字符（按需选择）。
 
-#### `fontminify presets generate`
+### `fontminify presets generate`
 
 内置了多个预设字库，使用 `fontminify presets generate` 可快速导出。若预设不满足需求，导出后可自行增删。
 
@@ -261,7 +259,7 @@ $ fontminify presets generate zh-CN-common-and-secondary-characters --out preset
 
 - **配置**：`FontminifyConfig`、`ResolvedFontminifyConfig`、`CollectConfig`、`FontsConfig`、`GlyphConfig`、`ReportConfig`
 - **结果**：`BuildReport`、`FontSubsetResult`、`FontFormat`
-- **错误**：`FontminifyError`（含 `code`：`USER_ERROR` / `RUNTIME_ERROR` / `EMPTY_CHARACTER_SET`）
+- **错误**：`FontminifyError`（含 `code`：`USER_ERROR` / `RUNTIME_ERROR` / `EMPTY_CHARACTER_LIST`）
 
 ### 示例
 
@@ -281,11 +279,11 @@ console.log(`Saved ${report.totalSavedBytes} bytes`)
 $ fontminify build --json > font-report.json
 ```
 
-| 退出码 | 含义                                      |
-| ------ | ----------------------------------------- |
-| 0      | 正常完成                                  |
-| 1      | 参数/路径错误、输入字符集为空等可修复问题 |
-| 2      | 子集化或 IO 错误                          |
+| 退出码 | 含义                                        |
+| ------ | ------------------------------------------- |
+| 0      | 正常完成                                    |
+| 1      | 参数/路径错误、未收集到任何字符等可修复问题 |
+| 2      | 子集化或 IO 错误                            |
 
 ## License
 

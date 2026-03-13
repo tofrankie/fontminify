@@ -19,7 +19,7 @@ interface CollectOptions {
 export function registerCollectCommand(program: Command): void {
   program
     .command('collect')
-    .description('Collect and print the character set from project files (for debugging)')
+    .description('Collect and print the characters to include from project files')
     .option('-c, --config <path>', 'Path to config file')
     .option('--include <glob...>', 'Glob patterns for files to scan')
     .option('--exclude <glob...>', 'Glob patterns to exclude')

@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { performance } from 'node:perf_hooks'
 import { loadConfigFile, resolveConfig, validateResolvedConfig } from '../config/resolve-config.js'
-import { mergeAndSort, readPresetFiles, resolvePresetPaths } from '../core/character-set.js'
+import { mergeAndSort, readPresetFiles, resolvePresetPaths } from '../core/character-list.js'
 import { collectChars } from '../core/extract.js'
 import { minifyAllFonts } from '../core/minify.js'
 import { buildReport, printReport, printReportJson } from '../core/report.js'
@@ -42,7 +42,7 @@ export function registerBuildCommand(program: Command): void {
     .option('--font-dest <dir>', 'Output font directory')
     .option('--formats <list>', 'Output formats, comma-separated (ttf,woff,woff2)')
     .option('--dry-run', 'Scan and estimate only, do not produce font files')
-    .option('--chars-out <path>', 'Write merged character set to file (for audit)')
+    .option('--chars-out <path>', 'Write merged characters to file (for audit)')
     .option('--silent', 'Suppress all non-error output')
     .option('--json', 'Output report as JSON (to stdout)')
     .addHelpText(
@@ -93,8 +93,8 @@ async function runBuild(opts: BuildOptions): Promise<void> {
 
   if (finalText.length === 0) {
     throw new FontminifyError(
-      ERROR_CODES.EMPTY_CHARACTER_SET,
-      'Final character set is empty after merging preset and scanned chars. ' +
+      ERROR_CODES.EMPTY_CHARACTER_LIST,
+      'No characters to include (merged list is empty). ' +
         'Add a --preset file or check --include patterns.'
     )
   }

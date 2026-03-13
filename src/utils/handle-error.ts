@@ -9,7 +9,7 @@ interface HandleErrorOptions {
  * Unified CLI error handler used by all commands.
  *
  * Exit codes:
- *   1 — USER_ERROR / EMPTY_CHARACTER_SET (bad arguments, invalid config, or fixable input issues)
+ *   1 — USER_ERROR / EMPTY_CHARACTER_LIST (bad arguments, invalid config, or no characters to include)
  *   2 — RUNTIME_ERROR or unknown (subsetting failure, I/O error, unexpected exception)
  * @param err
  * @param opts
@@ -18,7 +18,7 @@ export function handleCliError(err: unknown, opts: HandleErrorOptions = {}): nev
   const isFontminifyErr = err instanceof FontminifyError
   const isUserErr =
     isFontminifyErr &&
-    (err.code === ERROR_CODES.USER_ERROR || err.code === ERROR_CODES.EMPTY_CHARACTER_SET)
+    (err.code === ERROR_CODES.USER_ERROR || err.code === ERROR_CODES.EMPTY_CHARACTER_LIST)
   const exitCode = isUserErr ? 1 : 2
   const msg = err instanceof Error ? err.message : String(err)
 

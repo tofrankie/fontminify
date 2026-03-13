@@ -36,8 +36,8 @@ describe('handleCliError', () => {
     expect(exitSpy).toHaveBeenCalledWith(2)
   })
 
-  it('exits with 1 for EMPTY_CHARACTER_SET', () => {
-    const err = new FontminifyError('EMPTY_CHARACTER_SET', 'empty character set')
+  it('exits with 1 for EMPTY_CHARACTER_LIST', () => {
+    const err = new FontminifyError('EMPTY_CHARACTER_LIST', 'No characters to include.')
     handleCliError(err)
     expect(exitSpy).toHaveBeenCalledWith(1)
   })

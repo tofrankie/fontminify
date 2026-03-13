@@ -7,22 +7,22 @@ import {
   readPresetFile,
   readPresetFiles,
   resolvePresetPaths,
-  textToCharacterSet,
-} from '../src/core/character-set.js'
+  textToCharacterList,
+} from '../src/core/character-list.js'
 
-describe('textToCharacterSet', () => {
+describe('textToCharacterList', () => {
   it('extracts unique chars', () => {
-    const set = textToCharacterSet('hello')
+    const set = textToCharacterList('hello')
     expect([...set].sort().join('')).toBe('ehlo')
   })
 
   it('deduplicates repeated chars', () => {
-    expect(textToCharacterSet('aaa').size).toBe(1)
-    expect(textToCharacterSet('aaa').has('a')).toBe(true)
+    expect(textToCharacterList('aaa').size).toBe(1)
+    expect(textToCharacterList('aaa').has('a')).toBe(true)
   })
 
   it('excludes normal space but keeps other whitespace', () => {
-    const set = textToCharacterSet('a b\tc\u3000d')
+    const set = textToCharacterList('a b\tc\u3000d')
     expect(set.has(' ')).toBe(false)
     expect(set.has('\t')).toBe(true)
     expect(set.has('\u3000')).toBe(true)
@@ -30,14 +30,14 @@ describe('textToCharacterSet', () => {
   })
 
   it('handles CJK characters', () => {
-    const set = textToCharacterSet('你好世界')
+    const set = textToCharacterList('你好世界')
     expect(set.size).toBe(4)
     expect(set.has('你')).toBe(true)
     expect(set.has('界')).toBe(true)
   })
 
   it('ignores comment lines starting with #', () => {
-    const set = textToCharacterSet('# comment line\n中文')
+    const set = textToCharacterList('# comment line\n中文')
     expect(set.has('#')).toBe(false)
     expect(set.has('c')).toBe(false)
     expect(set.has('中')).toBe(true)
@@ -45,11 +45,11 @@ describe('textToCharacterSet', () => {
   })
 
   it('returns empty set for empty string', () => {
-    expect(textToCharacterSet('').size).toBe(0)
+    expect(textToCharacterList('').size).toBe(0)
   })
 
   it('returns empty set for normal-space-only string', () => {
-    expect(textToCharacterSet('     ').size).toBe(0)
+    expect(textToCharacterList('     ').size).toBe(0)
   })
 })
 

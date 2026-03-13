@@ -1,7 +1,7 @@
 import type { BuildReport, FontminifyConfig, ResolvedFontminifyConfig } from './types.js'
 import { performance } from 'node:perf_hooks'
 import { loadConfigFile, resolveConfig, validateResolvedConfig } from './config/resolve-config.js'
-import { mergeAndSort, readPresetFiles, resolvePresetPaths } from './core/character-set.js'
+import { mergeAndSort, readPresetFiles, resolvePresetPaths } from './core/character-list.js'
 import { collectChars } from './core/extract.js'
 import { minifyAllFonts } from './core/minify.js'
 import { buildReport } from './core/report.js'
@@ -61,8 +61,8 @@ export async function buildSubset(
 
   if (finalText.length === 0) {
     throw new FontminifyError(
-      ERROR_CODES.EMPTY_CHARACTER_SET,
-      'Final character set is empty. Add a preset file or check collect.include patterns.'
+      ERROR_CODES.EMPTY_CHARACTER_LIST,
+      'No characters to include. Add a preset file or check collect.include patterns.'
     )
   }
 

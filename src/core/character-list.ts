@@ -49,7 +49,7 @@ export async function readPresetFile(filePath: string): Promise<Set<string>> {
     )
   }
 
-  return textToCharacterSet(content)
+  return textToCharacterList(content)
 }
 
 /**
@@ -66,15 +66,15 @@ export async function readPresetFiles(filePaths: string[]): Promise<Set<string>>
 }
 
 /**
- * Convert arbitrary text to a deduplicated character set.
+ * Convert arbitrary text to a deduplicated set of characters.
  * @param text
  */
-export function textToCharacterSet(text: string): Set<string> {
+export function textToCharacterList(text: string): Set<string> {
   const chars = new Set<string>()
   const lines = text.split(LINE_BREAK_RE)
   for (const line of lines) {
     const trimmed = line.trim()
-    // Allow metadata/comment headers in preset files without polluting the character set.
+    // Allow metadata/comment headers in preset files without polluting the character list.
     if (trimmed.startsWith('# ')) continue
     for (const ch of line) {
       if (ch === ' ') continue
@@ -89,7 +89,7 @@ export function textToCharacterSet(text: string): Set<string> {
 }
 
 /**
- * Merge two character sets and return a sorted, deduplicated string.
+ * Merge two sets of characters and return a sorted, deduplicated string.
  * @param a
  * @param b
  */

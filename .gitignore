@@ -11,3 +11,4 @@ coverage/
 
 ./fontminify.config.js
 examples/react-ts/public/fonts
+**local.*

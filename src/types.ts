@@ -132,7 +132,7 @@ export interface FontminifyErrorLike extends Error {
    * Machine-readable error code:
    * - `USER_ERROR` — invalid user input (bad arguments, missing paths, etc.)
    * - `RUNTIME_ERROR` — runtime failure (subsetting error, I/O error, etc.)
-   * - `EMPTY_CHARACTER_SET` — the final merged character set is empty
+   * - `EMPTY_CHARACTER_LIST` — the final merged character list is empty (no characters to include)
    */
   code: string
 }

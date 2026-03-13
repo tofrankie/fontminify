@@ -43,7 +43,7 @@ describe('collectProjectChars', () => {
 })
 
 describe('buildSubset', () => {
-  it('throws EMPTY_CHARACTER_SET when no preset and no files match', async () => {
+  it('throws EMPTY_CHARACTER_LIST when no preset and no files match', async () => {
     const config = await getResolvedConfig(undefined, {
       presetCharsFile: [],
       collect: { include: [join(TMP, `empty-${Date.now()}`, '*.ts')] },
@@ -51,8 +51,8 @@ describe('buildSubset', () => {
     })
     await expect(buildSubset(config)).rejects.toThrow(FontminifyError)
     await expect(buildSubset(config)).rejects.toMatchObject({
-      code: 'EMPTY_CHARACTER_SET',
-      message: expect.stringMatching(/empty|character/),
+      code: 'EMPTY_CHARACTER_LIST',
+      message: expect.stringMatching(/no characters|include/i),
     })
   })
 

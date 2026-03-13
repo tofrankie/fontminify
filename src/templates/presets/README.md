@@ -26,7 +26,7 @@
 
 ---
 
-# Preset character sets
+# Preset character lists
 
 > Last updated: 2026-03-13
 

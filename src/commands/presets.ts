@@ -60,13 +60,13 @@ const PRESET_META: Record<string, { description: string; descriptionCN: string }
     descriptionCN: '台湾常用字（共 4808 字）',
   },
   'ascii-characters': {
-    description: 'ASCII character set',
-    descriptionCN: 'ASCII 常用字符集',
+    description: 'ASCII characters',
+    descriptionCN: 'ASCII 常用字符',
   },
 }
 
 export function registerPresetsCommand(program: Command): void {
-  const cmd = program.command('presets').description('Manage built-in preset character sets')
+  const cmd = program.command('presets').description('Manage built-in preset character lists')
 
   cmd
     .command('list')

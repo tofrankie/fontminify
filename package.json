@@ -1,11 +1,17 @@
 {
   "name": "@tofrankie/fontminify",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.32.0",
   "description": "Subset and minify fonts",
   "author": "Frankie <1426203851@qq.com>",
   "license": "MIT",
+  "homepage": "https://github.com/tofrankie/fontminify",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tofrankie/fontminify.git"
+  },
+  "bugs": "https://github.com/tofrankie/fontminify/issues",
   "keywords": [
     "font",
     "fontmin",
