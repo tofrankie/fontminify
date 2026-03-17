@@ -21,4 +21,11 @@ export default defineConfig([
       },
     ],
   },
+  {
+    // Child process entry for per-font subsetting (enables true multi-core parallelism).
+    entry: { 'minify-child': 'src/core/minify-child.ts' },
+    format: ['esm', 'cjs'],
+    dts: false,
+    target: 'node20',
+  },
 ])

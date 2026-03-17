@@ -1,6 +1,6 @@
 # @tofrankie/fontminify
 
-[npm version](https://www.npmjs.com/package/@tofrankie/fontminify) [node version](https://nodejs.org) [npm package license](https://github.com/tofrankie/fontminify/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify) [![node version](https://img.shields.io/node/v/@tofrankie/fontminify)](https://nodejs.org) [![npm package license](https://img.shields.io/npm/l/@tofrankie/fontminify)](https://github.com/tofrankie/fontminify/blob/main/LICENSE) [![npm last update](https://img.shields.io/npm/last-update/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify)
 
 [English](./README.md) | 中文
 
@@ -216,15 +216,15 @@ $ fontminify collect --json | jq .count
 
 目前仅收集了简体中文、繁体中文、香港常用字、台湾常用字、ASCII 字符。欢迎提交 PR 补充更多预设字库。👋
 
-| 预设名                                  | 说明                                                                                                      |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `zh-CN-common-characters`               | [现代汉语常用字](./src/templates/presets/zh-CN-common-characters.txt)（2500 字）                          |
-| `zh-CN-secondary-characters`            | [现代汉语次常用字](./src/templates/presets/zh-CN-secondary-characters.txt)（1000 字）                     |
-| `zh-CN-common-and-secondary-characters` | [现代汉语常用字 + 次常用字](./src/templates/presets/zh-CN-common-and-secondary-characters.txt)（3500 字） |
-| `zh-CN-punctuation-characters`          | [现代汉语标点符号](./src/templates/presets/zh-CN-punctuation-characters.txt)                              |
-| `zh-HK-common-characters`               | [香港常用字](./src/templates/presets/zh-HK-common-characters.txt)（4762 字）                              |
-| `zh-TW-common-characters`               | [台湾常用字](./src/templates/presets/zh-TW-common-characters.txt)（4808 字）                              |
-| `ascii-characters`                      | [ASCII 字符](./src/templates/presets/ascii-characters.txt)                                                |
+| 预设名                                  | 说明                                                                                                        |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `zh-CN-common-characters`               | [现代汉语常用字](./src/templates/presets/zh-CN-common-characters.txt)（2500 字）🇨🇳                          |
+| `zh-CN-secondary-characters`            | [现代汉语次常用字](./src/templates/presets/zh-CN-secondary-characters.txt)（1000 字）🇨🇳                     |
+| `zh-CN-common-and-secondary-characters` | [现代汉语常用字 + 次常用字](./src/templates/presets/zh-CN-common-and-secondary-characters.txt)（3500 字）🇨🇳 |
+| `zh-CN-punctuation-characters`          | [现代汉语标点符号](./src/templates/presets/zh-CN-punctuation-characters.txt) 🇨🇳                             |
+| `zh-HK-common-characters`               | [香港常用字](./src/templates/presets/zh-HK-common-characters.txt)（4762 字）🇨🇳 🇭🇰 🇲🇴                        |
+| `zh-TW-common-characters`               | [台湾常用字](./src/templates/presets/zh-TW-common-characters.txt)（4808 字）🇨🇳                              |
+| `ascii-characters`                      | [ASCII 字符](./src/templates/presets/ascii-characters.txt) 🇺🇸                                               |
 
 通常情况下，可能要多个预设进行组合，比如现代汉语常用字 + 次常用字 + 标点符号 + ASCII 字符（按需选择）。
 

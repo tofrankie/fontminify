@@ -1,6 +1,9 @@
 import type { FontFormat, FontSubsetResult, ResolvedFontminifyConfig } from '../types'
+import { fork } from 'node:child_process'
 import { mkdir, readdir, rm, stat } from 'node:fs/promises'
-import { basename, extname, join, normalize, resolve } from 'node:path'
+import os from 'node:os'
+import { basename, dirname, extname, join, normalize, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import Fontmin from 'fontmin'
 import { createRuntimeError, createUserError } from '../errors'
 
@@ -61,8 +64,11 @@ function buildFontmin(opts: Omit<MinifyOneFontOptions, 'dryRun'>): Fontmin {
   const fm = new Fontmin().src(srcPath).use(Fontmin.glyph({ text, hinting }))
 
   for (const fmt of formats) {
-    if (fmt === 'woff') fm.use(Fontmin.ttf2woff({ deflate: true }))
-    else if (fmt === 'woff2') fm.use(Fontmin.ttf2woff2())
+    if (fmt === 'woff') {
+      fm.use(Fontmin.ttf2woff({ deflate: true }))
+    } else if (fmt === 'woff2') {
+      fm.use(Fontmin.ttf2woff2())
+    }
   }
 
   return fm.dest(destDir)
@@ -156,19 +162,121 @@ export async function minifyAllFonts(
   checkOverwriteConflict(config.fonts.src, config.fonts.dest)
 
   const fontPaths = await discoverFonts(config.fonts.src)
-  const allResults: FontSubsetResult[] = []
+  const concurrency = resolveConcurrency(fontPaths.length)
 
-  for (const srcPath of fontPaths) {
-    const results = await minifyOneFont({
+  const perFontResults = await mapWithConcurrency(fontPaths, concurrency, async srcPath => {
+    const opts: MinifyOneFontOptions = {
       srcPath,
       destDir: config.fonts.dest,
       text,
       formats: config.fonts.formats,
       hinting: config.glyph.hinting,
       dryRun,
-    })
-    allResults.push(...results)
-  }
+    }
 
-  return allResults
+    // dry-run is cheap; keep it in-process to avoid child start-up overhead.
+    if (dryRun) return await minifyOneFont(opts)
+
+    // Run fontmin in a child process to achieve true multi-core parallelism.
+    // If spawning fails (e.g. weird packaging/runtime), gracefully fall back to in-process.
+    try {
+      return await minifyOneFontInChild(opts)
+    } catch {
+      return await minifyOneFont(opts)
+    }
+  })
+
+  return perFontResults.flat()
+}
+
+function resolveConcurrency(taskCount: number): number {
+  const fromEnv = Number.parseInt(process.env.FONTMINIFY_CONCURRENCY ?? '', 10)
+  const cpu = Math.max(1, os.cpus().length)
+  const defaultConcurrency = cpu
+  const raw = Number.isFinite(fromEnv) && fromEnv > 0 ? fromEnv : defaultConcurrency
+  return Math.max(1, Math.min(taskCount, raw))
+}
+
+/**
+ * Resolve path to the minify-child script so it works when parent is loaded as ESM or CJS.
+ */
+function getMinifyChildScriptPath(): string {
+  if (typeof import.meta !== 'undefined' && typeof import.meta.url === 'string') {
+    return join(dirname(fileURLToPath(import.meta.url)), 'minify-child.mjs')
+  }
+  return join(__dirname, 'minify-child.cjs')
+}
+
+async function minifyOneFontInChild(opts: MinifyOneFontOptions): Promise<FontSubsetResult[]> {
+  const childPath = getMinifyChildScriptPath()
+
+  return await new Promise<FontSubsetResult[]>((resolve, reject) => {
+    const child = fork(childPath, {
+      stdio: ['ignore', 'ignore', 'ignore', 'ipc'],
+    })
+
+    const cleanup = () => {
+      child.removeAllListeners('error')
+      child.removeAllListeners('exit')
+      child.removeAllListeners('message')
+    }
+
+    const onError = (err: unknown) => {
+      cleanup()
+      reject(err)
+    }
+
+    const onExit = (code: number | null, signal: NodeJS.Signals | null) => {
+      if (code === 0) return
+      cleanup()
+      reject(
+        createRuntimeError(
+          `Child process failed for "${basename(opts.srcPath)}" (code: ${code ?? 'null'}, signal: ${
+            signal ?? 'null'
+          })`
+        )
+      )
+    }
+
+    const onMessage = (msg: unknown) => {
+      const payload = msg as
+        | { ok: true; result: FontSubsetResult[] }
+        | { ok: false; error: { message: string } }
+
+      cleanup()
+      if (child.connected) child.disconnect()
+      if (payload?.ok) resolve(payload.result)
+      else reject(createRuntimeError(payload?.error?.message ?? 'Child process error'))
+    }
+
+    child.once('error', onError)
+    child.once('exit', onExit)
+    child.once('message', onMessage)
+
+    child.send({ type: 'minifyOneFont', payload: opts })
+  })
+}
+
+async function mapWithConcurrency<T, R>(
+  items: readonly T[],
+  concurrency: number,
+  mapper: (item: T, index: number) => Promise<R>
+): Promise<R[]> {
+  if (items.length === 0) return []
+  const cap = Math.max(1, Math.min(concurrency, items.length))
+
+  const results: R[] = Array.from({ length: items.length })
+  let nextIndex = 0
+
+  const workers = Array.from({ length: cap }, async () => {
+    while (true) {
+      const current = nextIndex
+      nextIndex += 1
+      if (current >= items.length) break
+      results[current] = await mapper(items[current], current)
+    }
+  })
+
+  await Promise.all(workers)
+  return results
 }

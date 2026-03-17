@@ -1,6 +1,6 @@
 # @tofrankie/fontminify
 
-[![npm version](https://img.shields.io/npm/v/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify) [![node version](https://img.shields.io/node/v/@tofrankie/fontminify)](https://nodejs.org) [![npm package license](https://img.shields.io/npm/l/@tofrankie/fontminify)](https://github.com/tofrankie/fontminify/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify) [![node version](https://img.shields.io/node/v/@tofrankie/fontminify)](https://nodejs.org) [![npm package license](https://img.shields.io/npm/l/@tofrankie/fontminify)](https://github.com/tofrankie/fontminify/blob/main/LICENSE) [![npm last update](https://img.shields.io/npm/last-update/@tofrankie/fontminify)](https://www.npmjs.com/package/@tofrankie/fontminify)
 
 English | [中文](./README.zh-CN.md)
 
@@ -11,10 +11,8 @@ English | [中文](./README.zh-CN.md)
 - **Which characters are kept?**
   - Automatically extracts characters used in your project (default: Chinese characters).
   - Built-in preset character lists (common characters, punctuation, ASCII, etc.) for quick export; you can edit exported files or build your own from scratch.
-
 - **Subsetting and output**
   - Batch subsetting; multiple output formats (WOFF, WOFF2, etc.).
-
 - **Usage**
   - CLI and Node API (for scripts); optional config file; full TypeScript types.
 
@@ -210,15 +208,15 @@ List all built-in presets.
 
 Current presets: Simplified Chinese, Traditional Chinese, Hong Kong common characters, Taiwan common characters, ASCII. PRs welcome for more preset character lists. 👋
 
-| Preset name                             | Description                                                                                                                     |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `zh-CN-common-characters`               | [Modern Chinese common characters](./src/templates/presets/zh-CN-common-characters.txt) (2,500 chars)                           |
-| `zh-CN-secondary-characters`            | [Modern Chinese secondary characters](./src/templates/presets/zh-CN-secondary-characters.txt) (1,000 chars)                     |
-| `zh-CN-common-and-secondary-characters` | [Modern Chinese common + secondary characters](./src/templates/presets/zh-CN-common-and-secondary-characters.txt) (3,500 chars) |
-| `zh-CN-punctuation-characters`          | [Chinese punctuation](./src/templates/presets/zh-CN-punctuation-characters.txt)                                                 |
-| `zh-HK-common-characters`               | [Hong Kong common characters](./src/templates/presets/zh-HK-common-characters.txt) (4,762 chars)                                |
-| `zh-TW-common-characters`               | [Taiwan common characters](./src/templates/presets/zh-TW-common-characters.txt) (4,808 chars)                                   |
-| `ascii-characters`                      | [ASCII characters](./src/templates/presets/ascii-characters.txt)                                                                |
+| Preset name                             | Description                                                                                                                        |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `zh-CN-common-characters`               | [Modern Chinese common characters](./src/templates/presets/zh-CN-common-characters.txt) (2,500 chars) 🇨🇳                           |
+| `zh-CN-secondary-characters`            | [Modern Chinese secondary characters](./src/templates/presets/zh-CN-secondary-characters.txt) (1,000 chars) 🇨🇳                     |
+| `zh-CN-common-and-secondary-characters` | [Modern Chinese common + secondary characters](./src/templates/presets/zh-CN-common-and-secondary-characters.txt) (3,500 chars) 🇨🇳 |
+| `zh-CN-punctuation-characters`          | [Chinese punctuation](./src/templates/presets/zh-CN-punctuation-characters.txt) 🇨🇳                                                 |
+| `zh-HK-common-characters`               | [Hong Kong common characters](./src/templates/presets/zh-HK-common-characters.txt) (4,762 chars) 🇨🇳 🇭🇰 🇲🇴                          |
+| `zh-TW-common-characters`               | [Taiwan common characters](./src/templates/presets/zh-TW-common-characters.txt) (4,808 chars) 🇨🇳                                   |
+| `ascii-characters`                      | [ASCII characters](./src/templates/presets/ascii-characters.txt) 🇺🇸                                                                |
 
 You can combine presets, e.g. common + secondary + punctuation + ASCII (choose as needed).
 
