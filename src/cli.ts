@@ -7,21 +7,60 @@ import { registerCollectCommand } from './commands/collect'
 import { registerInitCommand } from './commands/init'
 import { registerPresetsCommand } from './commands/presets'
 
-// Suppress DEP0180 emitted by fontmin's dependency chain on Node 22+.
-//
-// Root cause:  clone-stats@1.0.0 calls `new fs.Stats(...)` (deprecated in Node 22)
-//              inside vinyl's File.clone(), which is triggered by fontmin's ttf2woff2
-//              plugin every time it processes a file.
-// Dependency:  fontmin → vinyl@2 → clone-stats@1 → new fs.Stats()
-// Reference:   https://nodejs.org/api/deprecations.html#DEP0180
-//
-// Without suppression, every `fontminify build` run prints:
-//   (node:XXXX) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
-//   (Use `node --trace-deprecation ...` to show where the warning was created)
-//
-// We cannot fix this upstream without forking fontmin. The warning is suppressed
-// here (CLI entry only) so it does not pollute user output or CI logs.
-suppressDeprecation('DEP0180')
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const pkg = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf8')) as {
+  version: string
+}
+
+main()
+
+function main() {
+  // Suppress DEP0180 emitted by fontmin's dependency chain on Node 22+.
+  //
+  // Root cause:  clone-stats@1.0.0 calls `new fs.Stats(...)` (deprecated in Node 22)
+  //              inside vinyl's File.clone(), which is triggered by fontmin's ttf2woff2
+  //              plugin every time it processes a file.
+  // Dependency:  fontmin → vinyl@2 → clone-stats@1 → new fs.Stats()
+  // Reference:   https://nodejs.org/api/deprecations.html#DEP0180
+  //
+  // Without suppression, every `fontminify build` run prints:
+  //   (node:XXXX) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+  //   (Use `node --trace-deprecation ...` to show where the warning was created)
+  //
+  // We cannot fix this upstream without forking fontmin. The warning is suppressed
+  // here (CLI entry only) so it does not pollute user output or CI logs.
+  suppressDeprecation('DEP0180')
+
+  const program = new Command()
+
+  program
+    .name('fontminify')
+    .description('Subset and minify fonts')
+    .version(pkg.version, '-v, --version')
+    .addHelpText(
+      'after',
+      `
+  Examples:
+    $ fontminify                          Run full build with config file
+    $ fontminify build --dry-run          Preview without producing files
+    $ fontminify collect                  Output scanned chars to stdout
+    $ fontminify init                     Generate default config file
+    $ fontminify presets list             List built-in presets
+    $ fontminify presets generate         Write a preset to a file`
+    )
+
+  registerBuildCommand(program)
+  registerCollectCommand(program)
+  registerInitCommand(program)
+  registerPresetsCommand(program)
+
+  program.parseAsync(process.argv).catch(err => {
+    process.stderr.write(
+      `\x1B[31mError:\x1B[0m ${err instanceof Error ? err.message : String(err)}\n`
+    )
+    process.exit(2)
+  })
+}
 
 /**
  * Suppress a specific Node.js deprecation warning emitted by third-party dependencies.
@@ -60,38 +99,3 @@ function suppressDeprecation(targetCode: string): void {
     configurable: true,
   })
 }
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const pkg = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf8')) as {
-  version: string
-}
-
-const program = new Command()
-
-program
-  .name('fontminify')
-  .description('Subset and minify fonts')
-  .version(pkg.version, '-v, --version')
-  .addHelpText(
-    'after',
-    `
-Examples:
-  $ fontminify                          Run full build with config file
-  $ fontminify build --dry-run          Preview without producing files
-  $ fontminify collect                  Output scanned chars to stdout
-  $ fontminify init                     Generate default config file
-  $ fontminify presets list             List built-in presets
-  $ fontminify presets generate         Write a preset to a file`
-  )
-
-registerBuildCommand(program)
-registerCollectCommand(program)
-registerInitCommand(program)
-registerPresetsCommand(program)
-
-program.parseAsync(process.argv).catch(err => {
-  process.stderr.write(
-    `\x1B[31mError:\x1B[0m ${err instanceof Error ? err.message : String(err)}\n`
-  )
-  process.exit(2)
-})

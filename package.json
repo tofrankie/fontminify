@@ -60,7 +60,8 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "prepublishOnly": "pnpm lint && pnpm test && pnpm build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "github:release": "tfr"
   },
   "dependencies": {
     "@inquirer/prompts": "^8.3.2",
@@ -70,6 +71,7 @@
     "tinyglobby": "^0.2.15"
   },
   "devDependencies": {
+    "@tofrankie/action": "^0.0.3",
     "@tofrankie/eslint": "^0.0.15",
     "@tofrankie/prettier": "^0.0.5",
     "@types/fontmin": "^0.9.5",
