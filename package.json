@@ -50,7 +50,7 @@
   "scripts": {
     "dev": "tsdown --watch",
     "build": "tsdown",
-    "lint": "run-s lint:eslint lint:prettier tsc publint",
+    "lint": "run-s lint:eslint lint:prettier tsc",
     "lint:eslint": "eslint . --cache --fix",
     "lint:prettier": "prettier . --cache --write --log-level silent",
     "publint": "publint",
@@ -71,20 +71,20 @@
     "tinyglobby": "^0.2.15"
   },
   "devDependencies": {
-    "@tofrankie/action": "^0.0.3",
-    "@tofrankie/eslint": "^0.0.15",
-    "@tofrankie/prettier": "^0.0.5",
+    "@tofrankie/action": "^0.0.4",
+    "@tofrankie/eslint": "^0.0.16",
+    "@tofrankie/prettier": "^0.0.8",
     "@types/fontmin": "^0.9.5",
     "@types/node": "^25.5.0",
-    "@vitest/coverage-v8": "4.1.0",
+    "@vitest/coverage-v8": "4.1.2",
     "eslint": "^9.39.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
     "publint": "^0.3.18",
-    "tsdown": "^0.21.4",
+    "tsdown": "^0.21.6",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   }
 }
