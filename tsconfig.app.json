@@ -1,22 +1,18 @@
 {
+  "extends": "@tofrankie/tsconfig/node.lib.tsdown.json",
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2023",
-    "lib": ["ES2023"],
     "baseUrl": "./",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
     "paths": {
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "types": ["node"],
-    "strict": true,
-    "noEmit": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": false,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"]
 }

@@ -1,10 +1,8 @@
 {
-  "extends": "./tsconfig.app.json",
+  "extends": "@tofrankie/tsconfig/vitest.json",
   "compilerOptions": {
     "composite": false,
-    "types": ["node", "vitest/globals"],
     "noEmit": true
   },
-  "include": ["src/**/*.test.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.test.ts"]
 }
