@@ -8,11 +8,7 @@
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["node"],
-    "exactOptionalPropertyTypes": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "noUncheckedIndexedAccess": false,
-    "forceConsistentCasingInFileNames": true
+    "types": ["node"]
   },
   "include": ["src"]
 }

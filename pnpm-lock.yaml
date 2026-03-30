@@ -31,11 +31,11 @@ importers:
         specifier: ^0.0.17
         version: 0.0.17(@typescript-eslint/rule-tester@8.57.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.2(typescript@5.9.3))(@typescript-eslint/utils@8.57.2(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.1.2(@types/node@25.5.0)(vite@8.0.0(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(yaml@2.8.3)))
       '@tofrankie/prettier':
-        specifier: ^0.0.9
-        version: 0.0.9(prettier@3.8.1)
+        specifier: ^0.0.11
+        version: 0.0.11(prettier@3.8.1)
       '@tofrankie/tsconfig':
-        specifier: ^0.0.2
-        version: 0.0.2(typescript@5.9.3)
+        specifier: ^0.0.4
+        version: 0.0.4(typescript@5.9.3)
       '@types/fontmin':
         specifier: ^0.9.5
         version: 0.9.5
@@ -1226,20 +1226,20 @@ packages:
     peerDependencies:
       eslint: ^9.10.0 || ^10.0.0
 
-  '@tofrankie/prettier-plugin-wxml@0.0.5':
-    resolution: {integrity: sha512-BO00nG/cbNsAIziNByTCaqsxq674nRzhGKHPbyYAtrNTuvpvZLaSzwLRNbHblYOem42RTw8jJ85Xs55ZkoYElQ==}
+  '@tofrankie/prettier-plugin-wxml@0.0.7':
+    resolution: {integrity: sha512-Onzcz3o6F0ZZWXg8MwTe3e8a7cnOEptCVJi4uUc6ALvaCn7mp031INFCad5HxMFKbc6EtVRnDVzpkx8L8TTWrQ==}
     engines: {node: '>=18'}
     peerDependencies:
       prettier: '>=3.0.0'
 
-  '@tofrankie/prettier@0.0.9':
-    resolution: {integrity: sha512-xFJusI29yhY1MCLmuhiIntUqh/UDowPlZPn0ks3ZPnjet8gq1R5aMsQRw9sWMaKif4CbIznyMfIbtFi/ygJ8Xg==}
+  '@tofrankie/prettier@0.0.11':
+    resolution: {integrity: sha512-KbwU7Tx5pMxo6hnM6308fV3AfiycZ0Ut5DGW2T9ruUxfnyxfp+Q66SFvZgmN4235MxncVsBYtZJnV5ek/Zc3dQ==}
     engines: {node: '>=18'}
     peerDependencies:
       prettier: '>=3.0.0'
 
-  '@tofrankie/tsconfig@0.0.2':
-    resolution: {integrity: sha512-2+sQkfaxECGGNFRbqot0TNHPpveLPjw7exnygaFOsFvmKhxpIEkLpEAc+tfvbAM8W1l1n3qlBqniiQHOpg/Y0g==}
+  '@tofrankie/tsconfig@0.0.4':
+    resolution: {integrity: sha512-p6EN/xIAT+Pz2AYKUCFLv96oYlIzJEgqcF5Z+D+U8Vx4FQZwWzI1+Zd7JiLMb8ZmR6topfH8ZtxzBxnFmWzy3w==}
     engines: {node: ^20.0.0 || ^22.0.0 || ^24.0.0}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -5275,20 +5275,21 @@ snapshots:
       - typescript
       - vitest
 
-  '@tofrankie/prettier-plugin-wxml@0.0.5(prettier@3.8.1)':
+  '@tofrankie/prettier-plugin-wxml@0.0.7(prettier@3.8.1)':
     dependencies:
       '@babel/parser': 7.29.2
       angular-html-parser: 10.4.0
       p-limit: 7.3.0
       prettier: 3.8.1
+      prettier-plugin-organize-attributes: 1.0.0(prettier@3.8.1)
 
-  '@tofrankie/prettier@0.0.9(prettier@3.8.1)':
+  '@tofrankie/prettier@0.0.11(prettier@3.8.1)':
     dependencies:
-      '@tofrankie/prettier-plugin-wxml': 0.0.5(prettier@3.8.1)
+      '@tofrankie/prettier-plugin-wxml': 0.0.7(prettier@3.8.1)
       prettier: 3.8.1
       prettier-plugin-organize-attributes: 1.0.0(prettier@3.8.1)
 
-  '@tofrankie/tsconfig@0.0.2(typescript@5.9.3)':
+  '@tofrankie/tsconfig@0.0.4(typescript@5.9.3)':
     optionalDependencies:
       typescript: 5.9.3
 
