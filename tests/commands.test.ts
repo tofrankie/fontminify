@@ -161,15 +161,7 @@ describe('commands (in-process)', () => {
       await writeFile(join(tmpDir, 'code', 'a.ts'), 'x', 'utf8')
 
       process.chdir(tmpDir)
-      await program.parseAsync([
-        'node',
-        'fontminify',
-        'collect',
-        '--include',
-        'code/*.ts',
-        '--out',
-        'out.txt',
-      ])
+      await program.parseAsync(['node', 'fontminify', 'collect', '--include', 'code/*.ts', '--out', 'out.txt'])
 
       const stderrOut = stderrSpy.mock.calls.flat().join('')
       expect(stderrOut).toMatch(/written to/)
@@ -195,15 +187,7 @@ describe('commands (in-process)', () => {
       await writeFile(join(tmpDir, 'code', 'x.ts'), 'a', 'utf8')
 
       process.chdir(tmpDir)
-      await program.parseAsync([
-        'node',
-        'fontminify',
-        'collect',
-        '--include',
-        'code/*.ts',
-        '--json',
-        '--silent',
-      ])
+      await program.parseAsync(['node', 'fontminify', 'collect', '--include', 'code/*.ts', '--json', '--silent'])
 
       const out = (stdoutSpy.mock.calls.flat().join('') as string).trim()
       const parsed = JSON.parse(out)
@@ -243,15 +227,7 @@ describe('commands (in-process)', () => {
 
       process.chdir(tmpDir)
       await program
-        .parseAsync([
-          'node',
-          'fontminify',
-          'collect',
-          '--include',
-          'code/*.ts',
-          '--character-pattern',
-          '[',
-        ])
+        .parseAsync(['node', 'fontminify', 'collect', '--include', 'code/*.ts', '--character-pattern', '['])
         .catch(() => {})
 
       expect(exitSpy).toHaveBeenCalledWith(1)
@@ -303,9 +279,7 @@ describe('commands (in-process)', () => {
     it('generate writes preset file to --out', async () => {
       const cliPath = resolve(import.meta.dirname, '../dist/cli.mjs')
       if (!existsSync(cliPath)) {
-        console.warn(
-          '[commands.test] Skipping presets generate: dist/cli.mjs not found. Run "pnpm build" first.'
-        )
+        console.warn('[commands.test] Skipping presets generate: dist/cli.mjs not found. Run "pnpm build" first.')
         return
       }
       const outPath = join(tmpDir, 'preset.txt')

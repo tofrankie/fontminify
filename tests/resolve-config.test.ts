@@ -1,12 +1,7 @@
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import {
-  defineConfig,
-  loadConfigFile,
-  resolveConfig,
-  validateResolvedConfig,
-} from '../src/config/resolve-config'
+import { defineConfig, loadConfigFile, resolveConfig, validateResolvedConfig } from '../src/config/resolve-config'
 import { FontminifyError } from '../src/errors'
 
 // ─── resolveConfig ────────────────────────────────────────────────────────────
@@ -24,10 +19,7 @@ describe('resolveConfig', () => {
   })
 
   it('uses file config values over defaults', () => {
-    const config = resolveConfig(
-      { fonts: { src: 'my-fonts', dest: 'my-dist', formats: ['woff'] } },
-      {}
-    )
+    const config = resolveConfig({ fonts: { src: 'my-fonts', dest: 'my-dist', formats: ['woff'] } }, {})
 
     expect(config.fonts.src).toBe('my-fonts')
     expect(config.fonts.dest).toBe('my-dist')
@@ -102,9 +94,7 @@ describe('validateResolvedConfig', () => {
   it('throws USER_ERROR when fonts.src and fonts.dest are the same', () => {
     const bad = { ...valid, fonts: { ...valid.fonts, src: 'fonts', dest: 'fonts' } }
     expect(() => validateResolvedConfig(bad)).toThrow(FontminifyError)
-    expect(() => validateResolvedConfig(bad)).toThrowError(
-      /fonts\.src and fonts\.dest must be different/
-    )
+    expect(() => validateResolvedConfig(bad)).toThrowError(/fonts\.src and fonts\.dest must be different/)
   })
 
   it('thrown error has code USER_ERROR', () => {

@@ -43,17 +43,8 @@ export interface BuildReportOptions {
 }
 
 export function buildReport(opts: BuildReportOptions): BuildReport {
-  const {
-    results,
-    presetCharCount,
-    scannedCharCount,
-    totalCharCount,
-    durationMs,
-    dryRun = false,
-  } = opts
-  const sorted = [...results].sort(
-    (a: FontSubsetResult, b: FontSubsetResult) => b.savedBytes - a.savedBytes
-  )
+  const { results, presetCharCount, scannedCharCount, totalCharCount, durationMs, dryRun = false } = opts
+  const sorted = [...results].sort((a: FontSubsetResult, b: FontSubsetResult) => b.savedBytes - a.savedBytes)
 
   const totalOriginalSize = results.reduce((s, r) => s + r.originalSize, 0)
   const totalSubsetSize = results.reduce((s, r) => s + r.subsetSize, 0)
@@ -84,9 +75,7 @@ export function printReport(report: BuildReport): void {
   const dim = (s: string) => `\x1B[2m${s}\x1B[0m`
   const yellow = (s: string) => `\x1B[33m${s}\x1B[0m`
 
-  const title = report.dryRun
-    ? `${b('fontminify')} ${yellow('[dry-run]')} report`
-    : `${b('fontminify')} report`
+  const title = report.dryRun ? `${b('fontminify')} ${yellow('[dry-run]')} report` : `${b('fontminify')} report`
 
   process.stdout.write(`\n${title}\n${LINE}\n`)
 
@@ -120,18 +109,14 @@ export function printReport(report: BuildReport): void {
 
       const saved = green(`-${formatSize(r.savedBytes)} (${formatSavedPercent(r.savedPercent)})`)
       const relPath = dim(getRelativePath(r.outputPath))
-      process.stdout.write(
-        `  ${fmt} ${originalSize} → ${formatSize(r.subsetSize)}  ${saved}  ${relPath}\n`
-      )
+      process.stdout.write(`  ${fmt} ${originalSize} → ${formatSize(r.subsetSize)}  ${saved}  ${relPath}\n`)
     }
 
     process.stdout.write('\n')
   }
 
   if (!report.dryRun) {
-    const totalSaved = green(
-      `-${formatSize(report.totalSavedBytes)} (${formatSavedPercent(report.totalSavedPercent)})`
-    )
+    const totalSaved = green(`-${formatSize(report.totalSavedBytes)} (${formatSavedPercent(report.totalSavedPercent)})`)
     process.stdout.write(
       `${LINE}\n` +
         `${b('Total')}  ` +

@@ -55,9 +55,7 @@ function main() {
   registerPresetsCommand(program)
 
   program.parseAsync(process.argv).catch(err => {
-    process.stderr.write(
-      `\x1B[31mError:\x1B[0m ${err instanceof Error ? err.message : String(err)}\n`
-    )
+    process.stderr.write(`\x1B[31mError:\x1B[0m ${err instanceof Error ? err.message : String(err)}\n`)
     process.exit(2)
   })
 }
@@ -87,10 +85,7 @@ function suppressDeprecation(targetCode: string): void {
       code = args[1] as string | undefined
     }
     if (code === targetCode) return
-    orig(
-      warning as string,
-      ...(args as Parameters<typeof orig> extends [unknown, ...infer R] ? R : never[])
-    )
+    orig(warning as string, ...(args as Parameters<typeof orig> extends [unknown, ...infer R] ? R : never[]))
   }
 
   Object.defineProperty(process, 'emitWarning', {

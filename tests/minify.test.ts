@@ -2,12 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import {
-  checkOverwriteConflict,
-  discoverFonts,
-  minifyAllFonts,
-  minifyOneFont,
-} from '../src/core/minify'
+import { checkOverwriteConflict, discoverFonts, minifyAllFonts, minifyOneFont } from '../src/core/minify'
 import { FontminifyError } from '../src/errors'
 
 const TMP = tmpdir()

@@ -7,9 +7,7 @@ interface ChildRequest {
   type: 'minifyOneFont'
   payload: MinifyOneFontOptions
 }
-type ChildResponse =
-  | { ok: true; result: FontSubsetResult[] }
-  | { ok: false; error: { message: string } }
+type ChildResponse = { ok: true; result: FontSubsetResult[] } | { ok: false; error: { message: string } }
 
 async function handle(req: ChildRequest): Promise<ChildResponse> {
   try {

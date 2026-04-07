@@ -112,9 +112,7 @@ Examples:
         }
 
         if (!PRESET_META[name]) {
-          throw createUserError(
-            `Unknown preset "${name}". Run "fontminify presets list" to see available presets.`
-          )
+          throw createUserError(`Unknown preset "${name}". Run "fontminify presets list" to see available presets.`)
         }
 
         let outPath: string

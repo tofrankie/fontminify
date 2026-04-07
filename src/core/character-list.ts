@@ -44,9 +44,7 @@ export async function readPresetFile(filePath: string): Promise<Set<string>> {
   try {
     content = await readFile(filePath, 'utf8')
   } catch {
-    throw createUserError(
-      `Cannot read preset chars file "${filePath}". Make sure the file exists and is readable.`
-    )
+    throw createUserError(`Cannot read preset chars file "${filePath}". Make sure the file exists and is readable.`)
   }
 
   return textToCharacterList(content)
