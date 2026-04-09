@@ -63,7 +63,8 @@ export async function loadConfigFile(configPath?: string): Promise<FontminifyCon
     mod = await jiti.import(resolvedPath)
   } catch (err) {
     throw createRuntimeError(
-      `Failed to load config file "${resolvedPath}": ` + `${err instanceof Error ? err.message : String(err)}`
+      `Failed to load config file "${resolvedPath}": ` +
+        `${err instanceof Error ? err.message : String(err)}`
     )
   }
 
@@ -86,8 +87,10 @@ export function resolveConfig(
       cliOverrides.presetCharsFile ?? fileConfig.presetCharsFile ?? DEFAULTS.presetCharsFile
     ),
     collect: {
-      include: cliOverrides.collect?.include ?? fileConfig.collect?.include ?? DEFAULTS.collect.include,
-      exclude: cliOverrides.collect?.exclude ?? fileConfig.collect?.exclude ?? DEFAULTS.collect.exclude,
+      include:
+        cliOverrides.collect?.include ?? fileConfig.collect?.include ?? DEFAULTS.collect.include,
+      exclude:
+        cliOverrides.collect?.exclude ?? fileConfig.collect?.exclude ?? DEFAULTS.collect.exclude,
       characterPattern:
         cliOverrides.collect?.characterPattern ??
         fileConfig.collect?.characterPattern ??
@@ -123,7 +126,9 @@ function normalizeStringArray(val: string | string[] | undefined): string[] {
 export function validateResolvedConfig(config: ResolvedFontminifyConfig): void {
   // formats must be non-empty
   if (config.fonts.formats.length === 0) {
-    throw createUserError('fonts.formats is empty. Specify at least one output format: "ttf", "woff", or "woff2".')
+    throw createUserError(
+      'fonts.formats is empty. Specify at least one output format: "ttf", "woff", or "woff2".'
+    )
   }
 
   // formats must only contain valid values
@@ -138,23 +143,32 @@ export function validateResolvedConfig(config: ResolvedFontminifyConfig): void {
   // collect.include must be non-empty
   if (config.collect.include.length === 0) {
     throw createUserError(
-      'collect.include is empty. Provide at least one glob pattern to scan, ' + 'e.g. --include "src/**/*.{ts,tsx}".'
+      'collect.include is empty. Provide at least one glob pattern to scan, ' +
+        'e.g. --include "src/**/*.{ts,tsx}".'
     )
   }
 
   // fonts.src must be set
   if (!config.fonts.src.trim()) {
-    throw createUserError('fonts.src is empty. Set --font-src to the directory containing your .ttf source files.')
+    throw createUserError(
+      'fonts.src is empty. Set --font-src to the directory containing your .ttf source files.'
+    )
   }
 
   // fonts.dest must be set
   if (!config.fonts.dest.trim()) {
-    throw createUserError('fonts.dest is empty. Set --font-dest to the output directory for subsetted fonts.')
+    throw createUserError(
+      'fonts.dest is empty. Set --font-dest to the output directory for subsetted fonts.'
+    )
   }
 
   // fonts.src and fonts.dest must be different to avoid overwriting source fonts
-  if (normalizeComparableDirPath(config.fonts.src) === normalizeComparableDirPath(config.fonts.dest)) {
-    throw createUserError('fonts.src and fonts.dest must be different directories to avoid overwriting source fonts.')
+  if (
+    normalizeComparableDirPath(config.fonts.src) === normalizeComparableDirPath(config.fonts.dest)
+  ) {
+    throw createUserError(
+      'fonts.src and fonts.dest must be different directories to avoid overwriting source fonts.'
+    )
   }
 }
 

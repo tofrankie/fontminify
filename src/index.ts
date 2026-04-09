@@ -10,7 +10,14 @@ import { ERROR_CODES, FontminifyError } from './errors'
 export type { BuildReport, FontminifyConfig, ResolvedFontminifyConfig }
 export { defineConfig, validateResolvedConfig } from './config/resolve-config'
 export { ERROR_CODES, FontminifyError } from './errors'
-export type { CollectConfig, FontFormat, FontsConfig, FontSubsetResult, GlyphConfig, ReportConfig } from './types'
+export type {
+  CollectConfig,
+  FontFormat,
+  FontsConfig,
+  FontSubsetResult,
+  GlyphConfig,
+  ReportConfig,
+} from './types'
 
 /**
  * Resolve config from file + optional overrides.

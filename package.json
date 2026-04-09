@@ -64,20 +64,20 @@
     "github:release": "tfr"
   },
   "dependencies": {
-    "@inquirer/prompts": "^8.4.0",
+    "@inquirer/prompts": "^8.4.1",
     "commander": "^14.0.3",
     "fontmin": "^1.1.1",
     "jiti": "^2.6.1",
-    "tinyglobby": "^0.2.15"
+    "tinyglobby": "^0.2.16"
   },
   "devDependencies": {
-    "@tofrankie/action": "^0.0.6",
-    "@tofrankie/eslint": "^0.0.21",
-    "@tofrankie/prettier": "^0.0.17",
+    "@tofrankie/action": "^0.0.7",
+    "@tofrankie/eslint": "^0.2.1",
+    "@tofrankie/prettier": "^0.2.0",
     "@tofrankie/tsconfig": "^0.0.5",
     "@types/fontmin": "^0.9.5",
     "@types/node": "^25.5.2",
-    "@vitest/coverage-v8": "4.1.2",
+    "@vitest/coverage-v8": "4.1.4",
     "eslint": "^10.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
@@ -86,6 +86,6 @@
     "publint": "^0.3.18",
     "tsdown": "^0.21.7",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.2"
+    "vitest": "^4.1.4"
   }
 }

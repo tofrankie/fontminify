@@ -17,7 +17,8 @@ interface HandleErrorOptions {
 export function handleCliError(err: unknown, opts: HandleErrorOptions = {}): never {
   const isFontminifyErr = err instanceof FontminifyError
   const isUserErr =
-    isFontminifyErr && (err.code === ERROR_CODES.USER_ERROR || err.code === ERROR_CODES.EMPTY_CHARACTER_LIST)
+    isFontminifyErr &&
+    (err.code === ERROR_CODES.USER_ERROR || err.code === ERROR_CODES.EMPTY_CHARACTER_LIST)
   const exitCode = isUserErr ? 1 : 2
   const msg = err instanceof Error ? err.message : String(err)
 
@@ -31,7 +32,9 @@ export function handleCliError(err: unknown, opts: HandleErrorOptions = {}): nev
 
     // For unexpected errors, suggest using --trace for Node internals.
     if (!isFontminifyErr && err instanceof Error && err.stack) {
-      process.stderr.write('\x1B[2m(run with NODE_OPTIONS=--stack-trace-limit=25 for full stack)\x1B[0m\n')
+      process.stderr.write(
+        '\x1B[2m(run with NODE_OPTIONS=--stack-trace-limit=25 for full stack)\x1B[0m\n'
+      )
     }
   }
 

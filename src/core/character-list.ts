@@ -27,7 +27,11 @@ export async function resolvePresetPaths(patterns: string[]): Promise<string[]> 
   }
 
   if (globPatterns.length > 0) {
-    const matched = await glob(globPatterns, { absolute: true, onlyFiles: true })
+    const matched = await glob(globPatterns, {
+      cwd: process.cwd(),
+      absolute: true,
+      onlyFiles: true,
+    })
     resolved.push(...matched)
   }
 
@@ -44,7 +48,9 @@ export async function readPresetFile(filePath: string): Promise<Set<string>> {
   try {
     content = await readFile(filePath, 'utf8')
   } catch {
-    throw createUserError(`Cannot read preset chars file "${filePath}". Make sure the file exists and is readable.`)
+    throw createUserError(
+      `Cannot read preset chars file "${filePath}". Make sure the file exists and is readable.`
+    )
   }
 
   return textToCharacterList(content)

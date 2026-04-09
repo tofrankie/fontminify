@@ -54,7 +54,9 @@ async function runCollect(opts: CollectOptions): Promise<void> {
     process.stderr.write(`fontminify collect: scanning ${fileCount} file(s)...\n`)
     process.stderr.write(`fontminify collect: found ${chars.size} unique char(s)\n`)
     if (skippedFiles.length > 0) {
-      process.stderr.write(`fontminify collect: skipped ${skippedFiles.length} unreadable file(s)\n`)
+      process.stderr.write(
+        `fontminify collect: skipped ${skippedFiles.length} unreadable file(s)\n`
+      )
     }
   }
 

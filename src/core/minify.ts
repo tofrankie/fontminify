@@ -24,7 +24,9 @@ export async function discoverFonts(srcDir: string): Promise<string[]> {
   const ttfFiles = entries.filter(e => e.toLowerCase().endsWith('.ttf')).map(e => join(srcDir, e))
 
   if (ttfFiles.length === 0) {
-    throw createUserError(`No .ttf files found in "${srcDir}". Set --font-src to a directory containing TTF files.`)
+    throw createUserError(
+      `No .ttf files found in "${srcDir}". Set --font-src to a directory containing TTF files.`
+    )
   }
 
   return ttfFiles
@@ -235,7 +237,9 @@ async function minifyOneFontInChild(opts: MinifyOneFontOptions): Promise<FontSub
     }
 
     const onMessage = (msg: unknown) => {
-      const payload = msg as { ok: true; result: FontSubsetResult[] } | { ok: false; error: { message: string } }
+      const payload = msg as
+        | { ok: true; result: FontSubsetResult[] }
+        | { ok: false; error: { message: string } }
 
       cleanup()
       if (child.connected) child.disconnect()

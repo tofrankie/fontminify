@@ -87,7 +87,15 @@ describe('presets generate (in-process)', () => {
 
   it('writes preset to --out when preset dir is mocked', async () => {
     const outPath = join(cwd, 'preset-out.txt')
-    await program.parseAsync(['node', 'fontminify', 'presets', 'generate', 'zh-CN-common-characters', '--out', outPath])
+    await program.parseAsync([
+      'node',
+      'fontminify',
+      'presets',
+      'generate',
+      'zh-CN-common-characters',
+      '--out',
+      outPath,
+    ])
     expect(existsSync(outPath)).toBe(true)
     const content = await readFile(outPath, 'utf8')
     expect(content).toBe('test content')

@@ -34,7 +34,10 @@ export function registerBuildCommand(program: Command): void {
     .option('--preset <path...>', 'Preset chars file path(s)')
     .option('--include <glob...>', 'Glob patterns for files to scan')
     .option('--exclude <glob...>', 'Glob patterns to exclude from scan')
-    .option('--character-pattern <regex>', 'Unicode regex for character extraction (default: \\p{Script=Han})')
+    .option(
+      '--character-pattern <regex>',
+      'Unicode regex for character extraction (default: \\p{Script=Han})'
+    )
     .option('--font-src <dir>', 'Source font directory (reads all .ttf files)')
     .option('--font-dest <dir>', 'Output font directory')
     .option('--formats <list>', 'Output formats, comma-separated (ttf,woff,woff2)')
@@ -81,7 +84,9 @@ async function runBuild(opts: BuildOptions): Promise<void> {
   const { chars: scannedChars, skippedFiles } = await collectChars(config.collect)
 
   if (skippedFiles.length > 0 && !opts.silent && !opts.json) {
-    process.stderr.write(`fontminify: skipped ${skippedFiles.length} unreadable file(s) while scanning\n`)
+    process.stderr.write(
+      `fontminify: skipped ${skippedFiles.length} unreadable file(s) while scanning\n`
+    )
   }
 
   const finalText = mergeAndSort(presetChars, scannedChars)
@@ -89,7 +94,8 @@ async function runBuild(opts: BuildOptions): Promise<void> {
   if (finalText.length === 0) {
     throw new FontminifyError(
       ERROR_CODES.EMPTY_CHARACTER_LIST,
-      'No characters to include (merged list is empty). ' + 'Add a --preset file or check --include patterns.'
+      'No characters to include (merged list is empty). ' +
+        'Add a --preset file or check --include patterns.'
     )
   }
 
@@ -149,7 +155,9 @@ function buildCliConfig(opts: BuildOptions): Partial<FontminifyConfig> {
     override.fonts = {
       ...(opts.fontSrc ? { src: opts.fontSrc } : {}),
       ...(opts.fontDest ? { dest: opts.fontDest } : {}),
-      ...(opts.formats ? { formats: opts.formats.split(',').map(f => f.trim() as FontFormat) } : {}),
+      ...(opts.formats
+        ? { formats: opts.formats.split(',').map(f => f.trim() as FontFormat) }
+        : {}),
     }
   }
 

@@ -14,11 +14,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@tofrankie/eslint": "^0.0.21",
+    "@tofrankie/eslint": "^0.2.1",
     "@tofrankie/fontminify": "workspace:*",
     "@types/node": "^25.5.2",
     "@types/react": "^19.2.14",
@@ -26,6 +26,6 @@
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.2.0",
     "typescript": "~5.9.3",
-    "vite": "^8.0.5"
+    "vite": "^8.0.8"
   }
 }

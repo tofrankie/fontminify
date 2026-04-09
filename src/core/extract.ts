@@ -15,6 +15,7 @@ export async function globFiles(config: CollectConfig): Promise<string[]> {
   if (include.length === 0) return []
 
   const files = await glob(include, {
+    cwd: process.cwd(),
     ignore: exclude,
     absolute: true,
     onlyFiles: true,

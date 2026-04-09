@@ -30,7 +30,9 @@ describe('globFiles', () => {
 
 describe('collectChars', () => {
   it('throws USER_ERROR for invalid characterPattern', async () => {
-    await expect(collectChars({ include: ['**/*.ts'], characterPattern: '[' })).rejects.toMatchObject({
+    await expect(
+      collectChars({ include: ['**/*.ts'], characterPattern: '[' })
+    ).rejects.toMatchObject({
       code: 'USER_ERROR',
     })
     await expect(collectChars({ include: ['**/*.ts'], characterPattern: '[' })).rejects.toThrow(
