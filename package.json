@@ -1,7 +1,7 @@
 {
   "name": "@tofrankie/fontminify",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@10.32.0",
   "description": "Subset and minify fonts",
   "author": "Frankie <1426203851@qq.com>",
